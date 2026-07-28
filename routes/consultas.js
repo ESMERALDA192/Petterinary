@@ -34,7 +34,8 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         const actualizada = await Consulta.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!actualizada) return res.status(404).json({ mensaje: "No encontrada" });
+        if (!actualizada) 
+            return res.status(404).json({ mensaje: "No encontrada" });
         res.json(actualizada);
     } catch (error) {
         res.status(400).json({ mensaje: "Error al actualizar", error: error.message });

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const consultaSchema = new mongoose.Schema({
-animalId: { type: mongoose.Schema.Types.ObjectId, ref: "Animal", required: true}   
+animalId: { type: mongoose.Schema.Types.ObjectId, ref: "Animal", required: true}, 
     fechaConsulta: { type: Date, required: true },
     motivo: { type: String },
     diagnostico: { type: String },

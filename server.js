@@ -14,10 +14,10 @@ app.get("/", (req, res) => {
     res.send("API de Petterinary funcionando");
 });
 
-// Rutas de la API (las hace la Persona 3)
-// app.use("/api/propietarios", require("./routes/propietarios"));
-// app.use("/api/animales", require("./routes/animales"));
-// app.use("/api/consultas", require("./routes/consultas"));
+// Rutas de la API (las hace Paul)
+app.use("/api/propietarios", require("./routes/propietarios"));
+app.use("/api/animales", require("./routes/animales"));
+app.use("/api/consultas", require("./routes/consultas"));
 
 // Conectar a la base y arrancar el servidor
 conectarDB()
