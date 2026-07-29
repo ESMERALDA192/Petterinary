@@ -496,6 +496,8 @@ h1,h2,h3,p{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    text-align: center;
 }
 
 .contenedor-fila-cita-hoy{
@@ -508,6 +510,11 @@ h1,h2,h3,p{
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.contenedor-encabezado-tabla-citas-hoy, 
+.contenedor-encabezado-tabla-notificaciones{
+    background-color: var(--verdeCards);
 }
 
 .estado-fila{
@@ -566,6 +573,42 @@ h1,h2,h3,p{
     background-color: var(--verdeSecundario);
 }
 
+.btnEditar{
+    background-color: rgb(254, 188, 65);
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+
+}
+
+.btnEditar:hover{
+    background-color: rgb(230, 170, 58);
+}
+
+.btnEliminar{
+    background-color: rgb(244, 80, 80);
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+
+}
+
+.btnEliminar:hover{
+    background-color: rgb(213, 69, 69);
+}
+
 .contenido-tabla{
     display: flex;
     justify-content: center;
@@ -582,7 +625,27 @@ h1,h2,h3,p{
     box-shadow: 1px 1px 2px #e6e6e6;
     width: 100%;
     min-width: 70rem;
-    
+    border-collapse: collapse;
+    text-transform: uppercase;
+}
+
+.tabla .encabezados-tablas{
+    background-color: var(--verdeSecundario);
+    color: var(--blanco);
+    transition: all 0.3s;
+}
+
+.tabla .encabezados-tablas:hover{
+    background-color: var(--verdeTexto);
+    color: var(--blanco);
+}
+
+.tabla tbody tr{
+    transition: all 0.3s;
+}
+
+.tabla tbody tr:hover{
+    background-color: var(--verdeCards);
 }
 
 .tabla th,td{
