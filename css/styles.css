@@ -570,6 +570,9 @@ h1,h2,h3,p{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .tabla{
@@ -578,12 +581,15 @@ h1,h2,h3,p{
     padding: 2rem;
     box-shadow: 1px 1px 2px #e6e6e6;
     width: 100%;
+    min-width: 70rem;
+    
 }
 
 .tabla th,td{
     padding: 1rem;
     border-bottom: 1px solid #e6e6e6;
     text-align: center;
+    
 }
 
 /*Estilos fomularios de registro*/
