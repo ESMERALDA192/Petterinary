@@ -40,26 +40,26 @@
         <div class="contenedor-centrar">
             <div class="contenedor-dashboard">
                 <section class="seccion-bienvenida-dashboard">
-                    <p class="texto-principal">¡Bienvenido, Antony!</p>
+                   <p class="texto-principal" id="bienvenidaNombre">¡Bienvenido!</p>
                     <p class="texto-secundario">Sábado, 11 de julio de 2026</p>
                 </section>
                 <section class="cards">
                     <div class="card card-verde">
-                        <p class="texto-secundario">Citas hoy</p>
-                        <p class="numero-card">3</p>
-                    </div>
-                    <div class="card card-rojo">
-                        <p class="texto-secundario">Animales totales</p>
-                        <p class="numero-card">21</p>
-                    </div>
-                     <div class="card card-amarillo">
-                        <p class="texto-secundario">En tratamiento</p>
-                        <p class="numero-card">3</p>
-                    </div>
-                     <div class="card card-morado">
-                        <p class="texto-secundario">Propietarios</p>
-                        <p class="numero-card">29</p>
-                    </div>
+    <p class="texto-secundario">Citas hoy</p>
+    <p class="numero-card" id="citasHoy">0</p>
+</div>
+<div class="card card-rojo">
+    <p class="texto-secundario">Animales totales</p>
+    <p class="numero-card" id="totalAnimales">0</p>
+</div>
+ <div class="card card-amarillo">
+    <p class="texto-secundario">En tratamiento</p>
+    <p class="numero-card" id="enTratamiento">0</p>
+</div>
+ <div class="card card-morado">
+    <p class="texto-secundario">Propietarios</p>
+    <p class="numero-card" id="totalPropietarios">0</p>
+</div>
                 </section>
                 <section class="contenedor-tablas">
                     <div class="tabla-citas-hoy">
@@ -119,6 +119,8 @@
         </div>
     </footer>
     <script src="https://kit.fontawesome.com/472ad113de.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>

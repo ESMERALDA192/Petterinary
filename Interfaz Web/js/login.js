@@ -21,7 +21,8 @@ formulario.addEventListener("submit", async (e) => {
             throw new Error(datos.mensaje || "Credenciales incorrectas");
         }
 
-        window.location.href = "dashboard.html";
+      localStorage.setItem("nombreUsuario", datos.usuario.nombre);
+window.location.href = "dashboard.html";
 
     } catch (error) {
         document.querySelector(".error").classList.remove("hidden");
