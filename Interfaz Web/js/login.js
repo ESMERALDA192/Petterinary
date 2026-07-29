@@ -1,35 +1,30 @@
-const formulario = document.getElementById("formRegistro");
+const formulario = document.getElementById("formLogin");
 
 formulario.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const usuario = {
-        nombre: document.getElementById("nombre").value.trim(),
-        apellidos: document.getElementById("apellidos").value.trim(),
-        usuario: document.getElementById("usuario").value.trim(),
-        correo: document.getElementById("correo").value.trim(),
-        password: document.getElementById("password").value
-    };
+    const usuario = document.getElementById("usuario").value.trim();
+    const password = document.getElementById("password").value;
 
     try {
-        const respuesta = await fetch(`${API}/auth/registro`, {
+        const respuesta = await fetch(`${API}/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(usuario)
+            body: JSON.stringify({ usuario, password })
         });
 
         const datos = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(datos.mensaje || "Error al registrar");
+            throw new Error(datos.mensaje || "Credenciales incorrectas");
         }
 
-        alert("Cuenta creada correctamente. Ahora inicia sesión.");
-        window.location.href = "index.html";
+        window.location.href = "dashboard.html";
 
     } catch (error) {
-        alert(error.message);
+        document.querySelector(".error").classList.remove("hidden");
+        document.querySelector(".error").textContent = error.message;
     }
 });
