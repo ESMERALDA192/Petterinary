@@ -20,18 +20,16 @@ app.use("/api/propietarios", require("./routes/propietarios"));
 app.use("/api/animales", require("./routes/animales"));
 app.use("/api/consultas", require("./routes/consultas"));
 
-// Solo arranca el servidor si se ejecuta directamente (no cuando Vercel lo importa)
+// Conectar a la base de datos siempre (tanto en local como en Vercel)
+conectarDB().catch((error) => {
+    console.error("No se pudo conectar a la base de datos:", error.message);
+});
+
+// Solo abre un puerto si corres el archivo directamente (no cuando Vercel lo importa)
 if (require.main === module) {
-    conectarDB()
-        .then(() => {
-            app.listen(PORT, () => {
-                console.log(`Servidor iniciado en http://localhost:${PORT}`);
-            });
-        })
-        .catch((error) => {
-            console.error("No se pudo iniciar el servidor:", error.message);
-            process.exit(1);
-        });
+    app.listen(PORT, () => {
+        console.log(`Servidor iniciado en http://localhost:${PORT}`);
+    });
 }
 
 module.exports = app;
