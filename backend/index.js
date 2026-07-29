@@ -12,6 +12,16 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Esperar la conexión a la base de datos antes de procesar cada petición
+app.use(async (req, res, next) => {
+    try {
+        await conectarDB();
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
 // Ruta raiz para comprobar que la API funciona
 app.get("/", (req, res) => {
     res.send("API de Petterinary funcionando");
@@ -22,11 +32,6 @@ app.use("/api/propietarios", require("./routes/propietarios"));
 app.use("/api/animales", require("./routes/animales"));
 app.use("/api/consultas", require("./routes/consultas"));
 app.use("/api/auth", require("./routes/auth"));
-
-// Conectar a la base de datos siempre (tanto en local como en Vercel)
-conectarDB().catch((error) => {
-    console.error("No se pudo conectar a la base de datos:", error.message);
-});
 
 // Solo abre un puerto si corres el archivo directamente (no cuando Vercel lo importa)
 if (require.main === module) {
