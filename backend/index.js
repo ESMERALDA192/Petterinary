@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 app.use("/api/propietarios", require("./routes/propietarios"));
 app.use("/api/animales", require("./routes/animales"));
 app.use("/api/consultas", require("./routes/consultas"));
+app.use("/api/auth", require("./routes/auth"));
 
 // Conectar a la base de datos siempre (tanto en local como en Vercel)
 conectarDB().catch((error) => {
