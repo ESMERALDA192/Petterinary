@@ -1,4 +1,4 @@
-}async function cargarDashboard() {
+async function cargarDashboard() {
     try {
         const propietarios = await obtenerPropietarios();
         const animales = await apiObtenerAnimales();
