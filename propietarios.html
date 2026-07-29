@@ -35,7 +35,7 @@
             </div>
         </div>
     </header>
-
+ 
     <main class="main-dashboard">
         <div class="contenedor-centrar">
             <div class="contenedor-animales">
@@ -45,26 +45,22 @@
                 </section>
                 <section class="contenedor-tabla">
                     <div class="contenedor-btn-tabla">
-                        <button class="btn-registrar">+ Registrar propietario</button>
+                        <button class="btn-registrar" href="#registrarPropietario.html">+ Registrar propietario</button>
                     </div>
                     <div class="contenido-tabla">
                         <table class="tabla">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Dueño</th>
-                                    <th>Edad</th>
-                                    <th>Especie</th>
-                                    <th>Sexo</th>
-                                    <th>Raza</th>
-                                    <th>Peso</th>
-                                    <th>Fecha ingreso</th>
-                                    <th>Estado</th>
+                                    <th>Apellidos</th>
+                                    <th>Teléfono</th>
+                                    <th>Correo</th>
+                                    <th>Dirección</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tablaPropietarios">
                                 
                             </tbody>
                         </table>
@@ -81,8 +77,11 @@
             </div>
         </div>
     </footer>
+    <script src="js/api.js"></script>
+    <script src="js/propietarios.js"></script>
     <script src="https://kit.fontawesome.com/472ad113de.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+    
+    
     
 </body>
 </html>

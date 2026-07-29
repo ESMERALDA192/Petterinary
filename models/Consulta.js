@@ -11,3 +11,4 @@ animalId: { type: mongoose.Schema.Types.ObjectId, ref: "Animal", required: true}
 });
 
 module.exports = mongoose.model("Consulta", consultaSchema);
+

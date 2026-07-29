@@ -42,9 +42,14 @@
                     <fieldset class="contenido-formulario">
                         <legend>Registro de consulta</legend>
 
-                        <label for="animalId" class="campo-label">Id del animal</label>
-                        <input class="campo" type="number" name="animalId" id="animalId" required>
+                       <label for="animalId">Animal</label>
 
+<select
+id="animalId"
+class="campo"
+required>
+
+</select>
                         <label for="fechaConsulta" class="campo-label">Fecha y hora de la consulta</label>
                         <input class="campo" type="datetime-local" name="fechaConsulta" id="fechaConsulta" required>
 
@@ -82,8 +87,10 @@
             </div>
         </div>
     </footer>
+    <script src="js/api.js"></script>
+<script src="js/registrarConsulta.js"></script>
     <script src="https://kit.fontawesome.com/472ad113de.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+    
 
 </body>
 </html>

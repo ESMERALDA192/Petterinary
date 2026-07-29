@@ -4,20 +4,54 @@ const Consulta = require("../models/Consulta");
 
 router.get("/", async (req, res) => {
     try {
-        const consultas = await Consulta.find();
-        res.json(consultas);
-    } catch (error) {
-        res.status(500).json({ mensaje: "Error al obtener consultas", error: error.message });
+
+        const consultas = await Consulta.find()
+.populate({
+    path: "animalId",
+    populate: {
+        path: "propietarioId"
     }
 });
 
+        res.json(consultas);
+
+    } catch (error) {
+
+        res.status(500).json({
+            mensaje: "Error al obtener consultas",
+            error: error.message
+        });
+
+    }
+});
+
+
 router.get("/:id", async (req, res) => {
     try {
-        const consulta = await Consulta.findById(req.params.id);
-        if (!consulta) return res.status(404).json({ mensaje: "No encontrada" });
+
+        const consulta = await Consulta.findById(req.params.id)
+.populate({
+    path: "animalId",
+    populate: {
+        path: "propietarioId"
+    }
+});
+
+        if (!consulta) {
+            return res.status(404).json({
+                mensaje: "No encontrada"
+            });
+        }
+
         res.json(consulta);
+
     } catch (error) {
-        res.status(500).json({ mensaje: "Error", error: error.message });
+
+        res.status(500).json({
+            mensaje: "Error",
+            error: error.message
+        });
+
     }
 });
 

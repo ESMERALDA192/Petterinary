@@ -3,21 +3,42 @@ const router = express.Router();
 const Animal = require("../models/Animal");
 
 router.get("/", async (req, res) => {
-    try {
-        const animales = await Animal.find();
+
+    try{
+
+        const animales = await Animal.find()
+            .populate("propietarioId");
+
         res.json(animales);
-    } catch (error) {
-        res.status(500).json({ mensaje: "Error al obtener animales", error: error.message });
+
+    }catch(error){
+
+        res.status(500).json({
+            mensaje:"Error al obtener animales",
+            error:error.message
+        });
+
     }
+
 });
 
 router.get("/:id", async (req, res) => {
     try {
-        const animal = await Animal.findById(req.params.id);
-        if (!animal) return res.status(404).json({ mensaje: "No encontrado" });
+
+        const animal = await Animal.findById(req.params.id)
+            .populate("propietarioId");
+
+        if (!animal) {
+            return res.status(404).json({ mensaje: "No encontrado" });
+        }
+
         res.json(animal);
+
     } catch (error) {
-        res.status(500).json({ mensaje: "Error", error: error.message });
+        res.status(500).json({
+            mensaje: "Error",
+            error: error.message
+        });
     }
 });
 
