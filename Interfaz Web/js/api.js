@@ -2,7 +2,7 @@
 // CONFIGURACIÓN
 // =========================================
 //AQUI CAMBIEN POR LO DEL VERCEL PERO POR AHORA FUNCIONA EN LOCALHOST
-const API = "http://localhost:3000/api";
+const API = "https://api-petterinary.vercel.app/api";
 
 // =========================================
 // PROPIETARIOS
