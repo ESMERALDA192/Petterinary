@@ -1,4 +1,4 @@
-async function cargarDashboard() {
+}async function cargarDashboard() {
     try {
         const propietarios = await obtenerPropietarios();
         const animales = await apiObtenerAnimales();
@@ -13,10 +13,57 @@ async function cargarDashboard() {
         document.getElementById("enTratamiento").textContent = enTratamiento;
 
         const hoy = new Date().toDateString();
-        const citasHoy = consultas.filter(consulta =>
+        const consultasHoy = consultas.filter(consulta =>
             new Date(consulta.fechaConsulta).toDateString() === hoy
-        ).length;
-        document.getElementById("citasHoy").textContent = citasHoy;
+        );
+
+        document.getElementById("citasHoy").textContent = consultasHoy.length;
+
+        // Pintar la tabla de "Citas de hoy"
+        const contenedorCitas = document.querySelector(".contenedor-filas-citas-hoy");
+        contenedorCitas.innerHTML = "";
+
+        if (consultasHoy.length === 0) {
+            contenedorCitas.innerHTML = `<p class="fila-cita-hoy">No hay citas para hoy</p>`;
+        } else {
+            consultasHoy.forEach(consulta => {
+                const hora = new Date(consulta.fechaConsulta).toLocaleTimeString("es-MX", {
+                    hour: "2-digit", minute: "2-digit"
+                });
+                const nombreAnimal = consulta.animalId?.nombreAnimal ?? "Sin nombre";
+                const estadoClase = `estado-fila-cita-hoy-${consulta.estadoConsulta.toLowerCase()}`;
+
+                contenedorCitas.innerHTML += `
+                    <div class="contenedor-fila contenedor-fila-cita-hoy">
+                        <p class="fila-cita-hoy">${hora}</p>
+                        <p class="fila-cita-hoy">${nombreAnimal} - ${consulta.motivo ?? ""}</p>
+                        <p class="estado-fila ${estadoClase}">${consulta.estadoConsulta}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Pintar la tabla de "Notificaciones" (usamos las mismas consultas de hoy)
+        const contenedorNotif = document.querySelector(".contenedor-filas-notificaciones");
+        contenedorNotif.innerHTML = "";
+
+        if (consultasHoy.length === 0) {
+            contenedorNotif.innerHTML = `<p class="fila-notificacion">Sin notificaciones</p>`;
+        } else {
+            consultasHoy.forEach(consulta => {
+                const hora = new Date(consulta.fechaConsulta).toLocaleTimeString("es-MX", {
+                    hour: "2-digit", minute: "2-digit"
+                });
+                const nombreAnimal = consulta.animalId?.nombreAnimal ?? "Sin nombre";
+
+                contenedorNotif.innerHTML += `
+                    <div class="contenedor-fila contenedor-fila-notificacion">
+                        <p class="fila-notificacion">${hora}</p>
+                        <p class="fila-notificacion">${nombreAnimal} - ${consulta.motivo ?? ""}</p>
+                    </div>
+                `;
+            });
+        }
 
     } catch (error) {
         console.log(error);

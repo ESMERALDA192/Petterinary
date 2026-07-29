@@ -7,3 +7,15 @@ function menuBarras(){
 }
 
 menuBarras();
+
+function cerrarSesion(){
+    const btnSalir = document.querySelector(".opcion-nav-principal-salir");
+    if (btnSalir) {
+        btnSalir.addEventListener("click", () => {
+            localStorage.removeItem("nombreUsuario");
+            window.location.href = "index.html";
+        });
+    }
+}
+
+cerrarSesion();
