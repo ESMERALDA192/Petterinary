@@ -1,22 +1,42 @@
+/* =========================================================
+   PETTERINARY — Sistema de gestión veterinaria
+   Paleta: "expediente clínico" — verde pino, papel cálido,
+   acentos de miel y terracota. Tarjetas tipo ficha con
+   pestaña de color en vez de pastel plano.
+   ========================================================= */
+
 /*Variables para colores*/
 :root{
-    --verdePrimario: #04342C;
-    --verdeSecundario: #0F6E56;
-    --verdeCards: #E1F5EE;
-    --verdeTexto: #085041;
-    --grisBody: #F7F7F7; 
+    /* Verdes — identidad principal */
+    --verdePrimario: #0B3B32;
+    --verdeSecundario: #17795F;
+    --verdeCards: #E7F2EC;
+    --verdeTexto: #0F5A45;
+
+    /* Fondo general */
+    --grisBody: #F7F5F1;
     --blanco: #ffffff;
-    --rojoPrimario: #FF3B3B;
-    --rojoSecundario: #993C1D;
-    --rojoTexto: #4A1B0C;
-    --rojoHover: #e03333;
-    --rojoCards: #FAECE7;
-    --amarilloCard: #FAEEDA;
-    --amarilloSecundario: #854F0B;
-    --amarilloTexto: #412402;
-    --moradoCards: #EEEDFE;
-    --moradoSecundario: #534AB7;
-    --moradoTexto: #26215C;
+
+    /* Terracota — reemplaza el rojo puro, más cálido y a tono */
+    --rojoPrimario: #B5502E;
+    --rojoSecundario: #8C3D22;
+    --rojoTexto: #5C2716;
+    --rojoHover: #9A4326;
+    --rojoCards: #F7E9E2;
+
+    /* Miel — acento de firma, reemplaza amarillo genérico */
+    --amarilloCard: #FBEFD9;
+    --amarilloSecundario: #A66A15;
+    --amarilloTexto: #5A3B0B;
+
+    /* Azul pizarra — nuevo, para "completada" / info neutral */
+    --moradoCards: #E6ECF1;
+    --moradoSecundario: #3D5A73;
+    --moradoTexto: #223140;
+
+    /* Línea y sombra */
+    --lineaSutil: #E4E0D7;
+    --sombraSuave: 0 2px 10px rgba(11, 59, 50, 0.06);
 }
 
 /*Variables para mixins de displays*/
@@ -30,7 +50,7 @@ html {
     scroll-padding-top: 0rem;
     height: 100%;
 }
-*, 
+*,
 *:before,
 *:after {
     box-sizing: inherit;
@@ -39,14 +59,12 @@ html {
 body{
     font-size: 16px; /*1 rem = 10px*/
     /*Configuración de la fuente del sitio*/
-    font-family: Arial, Helvetica, sans-serif;
-    font-family: "Roboto", sans-serif;
+    font-family: "Public Sans", Arial, Helvetica, sans-serif;
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
-    font-variation-settings: "wdth" 100;
     background-color: var(--grisBody);
-    margin: 0; 
+    margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -67,10 +85,29 @@ h1,h2,h3,p{
     margin: 0;
 }
 
+/* Accesibilidad: foco visible en todo lo interactivo */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+    outline: 2px solid var(--amarilloSecundario);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 .texto-principal{
     color: var(--verdePrimario);
+    font-family: "Fraunces", "Public Sans", serif;
     font-size: 5rem;
-    font-weight: bold;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .texto-secundario{
@@ -114,7 +151,9 @@ h1,h2,h3,p{
 }
 
 .contenedor-izq{
-    background-color: var(--verdeCards);
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.35) 0, transparent 45%),
+        linear-gradient(160deg, var(--verdeCards) 0%, #D7EBE0 100%);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -122,6 +161,8 @@ h1,h2,h3,p{
     align-items: center;
     padding: 2rem;
     gap: 2rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .contenedor-izq .texto-secundario{
@@ -158,7 +199,7 @@ h1,h2,h3,p{
     .contenido-formulario-login{
         text-align: center;
         padding: 2rem;
-        
+
     }
 }
 
@@ -187,8 +228,8 @@ h1,h2,h3,p{
 
 .campo-label{
     color: var(--verdePrimario);
-    font-weight: bold;
-    font-size: 2rem;
+    font-weight: 600;
+    font-size: 1.9rem;
 }
 
 @media (max-width: 768px){
@@ -199,35 +240,45 @@ h1,h2,h3,p{
 
 .campo{
     padding: 1.5rem;
-    border: 1px solid var(--verdePrimario);
-    border-radius: 0.5rem;
+    border: 1px solid var(--lineaSutil);
+    border-radius: 0.6rem;
     margin-bottom: 2rem;
     font-size: 1.8rem;
+    font-family: inherit;
+    background-color: var(--blanco);
+    transition: border-color 0.2s, background-color 0.2s;
 }
 
 .campo:focus{
-    border: 2px solid var(--verdeSecundario);
+    border: 1.5px solid var(--verdeSecundario);
     background-color: var(--verdeCards);
+    outline: none;
 }
 
 .contenedor-campos .boton-login{
     padding: 1.5rem;
     background-color: var(--verdeSecundario);
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
     color: var(--blanco);
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.8rem;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background-color 0.25s, transform 0.15s;
 }
 
 .contenedor-campos .boton-login:hover{
     background-color: var(--verdePrimario);
+    transform: translateY(-1px);
+}
+
+.contenedor-campos .boton-login:active{
+    transform: translateY(0);
 }
 
 .error{
     color: var(--rojoPrimario);
+    font-size: 1.5rem;
 }
 
 .hidden{
@@ -236,11 +287,12 @@ h1,h2,h3,p{
 
 .texto-registro{
     text-align: center;
+    font-size: 1.5rem;
 }
 
 .link-registro{
     color: var(--verdeTexto);
-    font-weight: bold;
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -254,13 +306,28 @@ h1,h2,h3,p{
 /*############### Empiezan estilos de interfaz de dashboard ###############*/
 .header{
     background-color: var(--verdePrimario);
+    box-shadow: var(--sombraSuave);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 2px, transparent 2px);
+    background-size: 2.4rem 2.4rem;
+    pointer-events: none;
+}
+
+.header .contenedor-centrar{
+    position: relative;
+    z-index: 1;
 }
 
 .logo-dash{
     width: 10rem;
 }
-
-/*############### Empiezan estilos de interfaz de dashboard ###############*/
 
 /*############### Empiezan estilos del dashboard ###############*/
 /*Estilos de la barra superior*/
@@ -277,7 +344,7 @@ h1,h2,h3,p{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     position: unset;
     background-color: unset;
     width: unset;
@@ -332,31 +399,32 @@ h1,h2,h3,p{
 .navegacion-principal .opcion-nav-principal{
     color: #fff;
     text-decoration: none;
-    transition: all 0.3s;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
+    transition: background-color 0.25s;
+    padding: 1rem 1.4rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    font-size: 1.5rem;
 }
 
 .navegacion-principal .opcion-nav-principal:hover{
-    background-color: var(--verdeSecundario);
-    
+    background-color: rgba(255,255,255,0.12);
 }
 
 .navegacion-principal .opcion-nav-principal-salir{
-    background-color: var(--rojoPrimario);
-    border: none;
-    border-radius: 1rem;
-    padding: 1rem 4rem;
+    background-color: transparent;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 0.6rem;
+    padding: 1rem 2.4rem;
     cursor: pointer;
     color: var(--blanco);
-    font-weight: bold;
-    font-size: 1.6rem;
-    transition: all 0.3s;
+    font-weight: 600;
+    font-size: 1.5rem;
+    transition: all 0.25s;
 }
 
 .opcion-nav-principal-salir:hover{
-    background-color: var(--rojoHover);
+    background-color: var(--rojoPrimario);
+    border-color: var(--rojoPrimario);
 }
 
 
@@ -370,6 +438,10 @@ h1,h2,h3,p{
 
 .seccion-bienvenida-dashboard{
     margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
 }
 
 .seccion-bienvenida-dashboard p{
@@ -383,14 +455,26 @@ h1,h2,h3,p{
 }
 
 .seccion-bienvenida-dashboard .texto-principal{
-    font-size: 3.5rem;
+    font-size: 3.6rem;
     margin-top: 3rem;
+}
+
+.ilustracion-bienvenida{
+    flex-shrink: 0;
+    width: 12rem;
+    opacity: 0.9;
+}
+
+@media(max-width: 768px){
+    .ilustracion-bienvenida{
+        display: none;
+    }
 }
 
 .cards{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     gap: 1.5rem;
     margin-bottom: 3rem;
 }
@@ -402,70 +486,98 @@ h1,h2,h3,p{
     }
 }
 
+/* Tarjetas tipo "ficha de expediente": fondo blanco,
+   pestaña de color a la izquierda, número en serif grande. */
 .card{
-    padding: 2rem 2rem;
+    padding: 2rem 6rem 2rem 2.2rem;
     width: 100%;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
+    background-color: var(--blanco);
+    border-left: 5px solid transparent;
+    box-shadow: var(--sombraSuave);
+    position: relative;
+    overflow: hidden;
 }
 
 .card .texto-secundario{
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin-bottom: 3rem;
-}
-
-.card-verde{
-    background-color: var(--verdeCards);
-}
-
-.card-verde .texto-secundario{
-    color: var(--verdeSecundario);
-}
-
-.card-verde .numero-card{
-    color: var(--verdeTexto);
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .card .numero-card{
-    font-size: 3rem;
+    font-family: "Fraunces", "Public Sans", serif;
+    font-size: 3.6rem;
+    font-weight: 600;
 }
+
+/* Icono circular en cada tarjeta */
+.card-icono-wrap{
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icono-wrap svg{
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+.card-verde{
+    border-left-color: var(--verdeSecundario);
+}
+.card-verde .texto-secundario{
+    color: var(--verdeSecundario);
+}
+.card-verde .numero-card{
+    color: var(--verdeTexto);
+}
+.card-verde .card-icono-wrap{ background-color: var(--verdeCards); }
+.card-verde .card-icono-wrap svg{ fill: var(--verdeSecundario); }
 
 .card-rojo{
-    background-color: var(--rojoCards);
+    border-left-color: var(--rojoPrimario);
 }
-
 .card-rojo .texto-secundario{
     color: var(--rojoSecundario);
 }
-
 .card-rojo .numero-card{
     color: var(--rojoTexto);
 }
+.card-rojo .card-icono-wrap{ background-color: var(--rojoCards); }
+.card-rojo .card-icono-wrap svg{ fill: var(--rojoSecundario); }
 
 .card-amarillo{
-    background-color: var(--amarilloCard);
+    border-left-color: var(--amarilloSecundario);
 }
-
 .card-amarillo .texto-secundario{
     color: var(--amarilloSecundario);
 }
-
 .card-amarillo .numero-card{
     color: var(--amarilloTexto);
 }
+.card-amarillo .card-icono-wrap{ background-color: var(--amarilloCard); }
+.card-amarillo .card-icono-wrap svg{ fill: var(--amarilloSecundario); }
 
 .card-morado{
-    background-color: var(--moradoCards);
+    border-left-color: var(--moradoSecundario);
 }
-
 .card-morado .texto-secundario{
     color: var(--moradoSecundario);
 }
-
 .card-morado .numero-card{
     color: var(--moradoTexto);
 }
+.card-morado .card-icono-wrap{ background-color: var(--moradoCards); }
+.card-morado .card-icono-wrap svg{ fill: var(--moradoSecundario); }
 
 /*############### Terminan estilos de las cards del dashboard ###############*/
 
@@ -486,13 +598,13 @@ h1,h2,h3,p{
 .tabla-citas-hoy, .tabla-notificaciones{
     background-color: var(--blanco);
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 1px 1px 2px #e6e6e6;
+    border-radius: 0.8rem;
+    box-shadow: var(--sombraSuave);
 }
 
 .contenedor-fila{
-    border-bottom: 1px solid #e6e6e6;
-    padding: 1rem;
+    border-bottom: 1px solid var(--lineaSutil);
+    padding: 1.2rem 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -500,42 +612,60 @@ h1,h2,h3,p{
     text-align: center;
 }
 
+.contenedor-fila:last-child{
+    border-bottom: none;
+}
+
 .contenedor-fila-cita-hoy{
     display: flex;
 }
 
 .encabezado-tabla{
-    font-weight: bold;
-    font-size: 1.8rem;
+    font-weight: 700;
+    font-size: 1.7rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    color: var(--verdePrimario);
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--verdeCards);
+    margin-bottom: 0.5rem;
 }
 
-.contenedor-encabezado-tabla-citas-hoy, 
+.contenedor-encabezado-tabla-citas-hoy,
 .contenedor-encabezado-tabla-notificaciones{
     background-color: var(--verdeCards);
 }
 
 .estado-fila{
-    padding: 1rem 2rem;
+    padding: 0.6rem 1.6rem;
     border-radius: 2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .icon-tabla{
-    width: 3rem;
+    width: 2.4rem;
 }
 
 .estado-fila-cita-hoy-confirmada{
     background-color: var(--verdeCards);
+    color: var(--verdeTexto);
 }
 
 .estado-fila-cita-hoy-pendiente{
     background-color: var(--amarilloCard);
+    color: var(--amarilloTexto);
 }
 
 .estado-fila-cita-hoy-cancelada{
+    background-color: var(--rojoCards);
+    color: var(--rojoTexto);
+}
+
+.estado-fila-cita-hoy-completada{
     background-color: var(--moradoCards);
+    color: var(--moradoTexto);
 }
 
 /*############### Terminan estilos de las tablas del dashboard ###############*/
@@ -545,8 +675,9 @@ h1,h2,h3,p{
 .footer{
     text-align: center;
     background-color: var(--verdePrimario);
-    color: var(--blanco);
+    color: rgba(255,255,255,0.75);
     padding: 2rem;
+    font-size: 1.4rem;
 }
 
 /*############### Terminan estilos del footer del dashboard ###############*/
@@ -563,16 +694,17 @@ h1,h2,h3,p{
     background-color: var(--verdePrimario);
     color: var(--blanco);
     border: none;
-    border-radius: 1rem;
-    padding: 1.5rem 2rem;
-    font-size: 1.8rem;
+    border-radius: 0.6rem;
+    padding: 1.4rem 2.2rem;
+    font-size: 1.6rem;
     cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
+    transition: background-color 0.25s, transform 0.15s;
+    font-weight: 600;
 }
 
 .btn-registrar:hover{
     background-color: var(--verdeSecundario);
+    transform: translateY(-1px);
 }
 
 .btnEditar{
@@ -681,13 +813,19 @@ h1,h2,h3,p{
 
 .tabla{
     background-color: var(--blanco);
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     padding: 2rem;
-    box-shadow: 1px 1px 2px #e6e6e6;
+    box-shadow: var(--sombraSuave);
     width: 100%;
     min-width: 70rem;
     border-collapse: collapse;
     text-transform: uppercase;
+}
+
+.tabla th{
+    color: var(--blanco);
+    font-size: 1.4rem;
+    letter-spacing: 0.03em;
 }
 
 .tabla .encabezados-tablas{
@@ -710,10 +848,9 @@ h1,h2,h3,p{
 }
 
 .tabla th,td{
-    padding: 1rem;
-    border-bottom: 1px solid #e6e6e6;
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid var(--lineaSutil);
     text-align: center;
-    
 }
 
 /*Estilos fomularios de registro*/
@@ -726,33 +863,87 @@ h1,h2,h3,p{
     border: none;
     background-color: var(--blanco);
     padding: 3rem;
-    border-radius: 1rem;
-    box-shadow: 1px 2px 2px #e6e6e6;
+    border-radius: 0.8rem;
+    box-shadow: var(--sombraSuave);
 }
 
 .contenido-formulario legend{
-    font-size: 3rem;
+    font-family: "Fraunces", "Public Sans", serif;
+    font-size: 2.8rem;
     text-align: center;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--verdePrimario);
+    margin-bottom: 1rem;
 }
 
 .contenido-formulario .boton-registro{
     background-color: var(--verdeSecundario);
     color: var(--blanco);
     border: none;
-    border-radius: 1rem;
-    padding: 2rem;
-    font-size: 1.8rem;
+    border-radius: 0.6rem;
+    padding: 1.8rem;
+    font-size: 1.7rem;
     cursor: pointer;
-    transition: all 0.3s;
-    font-weight: bold;
+    transition: background-color 0.25s, transform 0.15s;
+    font-weight: 600;
 }
 
 .contenido-formulario .boton-registro:hover{
-    background-color: var(--verdeTexto);
+    background-color: var(--verdePrimario);
+    transform: translateY(-1px);
 }
 
 .contenido-formulario select{
-    padding: 1rem;
+    padding: 1.2rem;
+    border-radius: 0.6rem;
+    border: 1px solid var(--lineaSutil);
+    font-family: inherit;
+    font-size: 1.6rem;
 }
+
+/*############### Elementos decorativos adicionales ###############*/
+
+/* Avatar circular con inicial del usuario */
+.avatar-usuario{
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
+    background-color: var(--verdeSecundario);
+    color: var(--blanco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fraunces", serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    border: 2px solid rgba(255,255,255,0.4);
+    flex-shrink: 0;
+}
+
+/*############### Iconos por especie de animal ###############*/
+.fila-especie{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.icono-especie{
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icono-especie i{
+    font-size: 1.5rem;
+}
+
+.icono-especie.perro{ background-color: var(--verdeCards); color: var(--verdeSecundario); }
+.icono-especie.gato{ background-color: var(--amarilloCard); color: var(--amarilloSecundario); }
+.icono-especie.ave{ background-color: var(--moradoCards); color: var(--moradoSecundario); }
+.icono-especie.conejo{ background-color: var(--rojoCards); color: var(--rojoSecundario); }
+.icono-especie.otro{ background-color: var(--grisBody); color: var(--verdePrimario); }

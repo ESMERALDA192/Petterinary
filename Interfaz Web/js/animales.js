@@ -1,3 +1,19 @@
+
+function iconoEspecie(especie){
+    const mapa = {
+        "perro": "fa-solid fa-dog",
+        "gato": "fa-solid fa-cat",
+        "ave": "fa-solid fa-dove",
+        "conejo": "fa-solid fa-rabbit"
+    };
+    return mapa[especie?.toLowerCase()] || "fa-solid fa-paw";
+}
+
+function claseEspecie(especie){
+    const claves = ["perro", "gato", "ave", "conejo"];
+    const clave = especie?.toLowerCase();
+    return claves.includes(clave) ? clave : "otro";
+}
 const tabla=document.getElementById("tablaAnimales");
 
 const btnRegistrar=document.querySelector(".btn-registrar");
@@ -30,9 +46,15 @@ async function cargarAnimales(){
 
                 <td>${animal.propietarioId?.nombrePropietario ?? "Sin propietario"}</td>
 
-                <td>-</td>
 
-                <td>${animal.especieAnimal}</td>
+             <td>
+    <span class="fila-especie">
+        <span class="icono-especie ${claseEspecie(animal.especieAnimal)}">
+            <i class="${iconoEspecie(animal.especieAnimal)}"></i>
+        </span>
+        ${animal.especieAnimal}
+    </span>
+</td>
 
                 <td>${animal.sexoAnimal}</td>
 
