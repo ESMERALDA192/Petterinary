@@ -1,4 +1,7 @@
+const btnBuscar = document.getElementById("btnBuscar");
+const txtBuscar = document.getElementById("buscar");
 
+btnBuscar.addEventListener("click", buscarAnimal);
 function iconoEspecie(especie){
     const mapa = {
         "perro": "fa-solid fa-dog",
@@ -24,93 +27,120 @@ btnRegistrar.addEventListener("click",()=>{
 
 });
 
+async function buscarAnimal() {
+
+    try {
+
+        const texto = txtBuscar.value.trim().toLowerCase();
+
+        const animales = await apiObtenerAnimales();
+
+        if (texto === "") {
+
+            mostrarTabla(animales);
+            return;
+
+        }
+
+        const resultado = animales.filter(animal =>
+
+            animal.nombreAnimal.toLowerCase().includes(texto)
+
+        );
+
+        mostrarTabla(resultado);
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
 cargarAnimales();
 
 async function cargarAnimales(){
 
     try{
 
-        const animales=await apiObtenerAnimales();
+        const animales = await apiObtenerAnimales();
 
-        tabla.innerHTML="";
+        mostrarTabla(animales);
 
-        animales.forEach(animal=>{
-
-            tabla.innerHTML+=`
-
-            <tr>
-
-                <td>${animal._id}</td>
-
-                <td>${animal.nombreAnimal}</td>
-
-                <td>${animal.propietarioId?.nombrePropietario ?? "Sin propietario"}</td>
-
-
-             <td>
-    <span class="fila-especie">
-        <span class="icono-especie ${claseEspecie(animal.especieAnimal)}">
-            <i class="${iconoEspecie(animal.especieAnimal)}"></i>
-        </span>
-        ${animal.especieAnimal}
-    </span>
-</td>
-
-                <td>${animal.sexoAnimal}</td>
-
-                <td>${animal.razaAnimal}</td>
-
-                <td>${animal.pesoAnimal}</td>
-
-                <td>${new Date(animal.fechaIngresoAnimal).toLocaleDateString()}</td>
-
-                <td>${animal.estadoAnimal}</td>
-
-                <td>
-
-                    <button class="btnEditar"
-
-                    data-id="${animal._id}">
-
-                    Editar
-
-                    </button>
-
-                    <button class="btnEliminar"
-
-                    data-id="${animal._id}">
-
-                    Eliminar
-
-                    </button>
-
-                </td>
-
-            </tr>
-
-            `;
-
-        });
-
-        document.querySelectorAll(".btnEditar").forEach(boton=>{
-
-            boton.addEventListener("click",editarAnimal);
-
-        });
-
-        document.querySelectorAll(".btnEliminar").forEach(boton=>{
-
-            boton.addEventListener("click",eliminarAnimalTabla);
-
-        });
-
-    }
-
-    catch(error){
+    }catch(error){
 
         console.log(error);
 
     }
+
+}
+
+
+function mostrarTabla(animales){
+
+    tabla.innerHTML = "";
+
+    animales.forEach(animal => {
+
+        tabla.innerHTML += `
+
+        <tr>
+
+            <td>${animal.nombreAnimal}</td>
+
+            <td>${animal.propietarioId?.nombrePropietario ?? "Sin propietario"}</td>
+
+            <td>
+                <span class="fila-especie">
+                    <span class="icono-especie ${claseEspecie(animal.especieAnimal)}">
+                        <i class="${iconoEspecie(animal.especieAnimal)}"></i>
+                    </span>
+                    ${animal.especieAnimal}
+                </span>
+            </td>
+
+            <td>${animal.sexoAnimal}</td>
+
+            <td>${animal.razaAnimal}</td>
+
+            <td>${animal.pesoAnimal}</td>
+
+            <td>${new Date(animal.fechaIngresoAnimal).toLocaleDateString()}</td>
+
+            <td>${animal.estadoAnimal}</td>
+
+            <td>
+
+                <button class="btnEditar"
+                        data-id="${animal._id}">
+                    Editar
+                </button>
+
+                <button class="btnEliminar"
+                        data-id="${animal._id}">
+                    Eliminar
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.querySelectorAll(".btnEditar").forEach(boton => {
+
+        boton.addEventListener("click", editarAnimal);
+
+    });
+
+    document.querySelectorAll(".btnEliminar").forEach(boton => {
+
+        boton.addEventListener("click", eliminarAnimalTabla);
+
+    });
 
 }
 
