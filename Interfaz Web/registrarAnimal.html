@@ -54,9 +54,15 @@ class="campo">
 
                         <label for="nombreAnimal" class="campo-label">Nombre del animal</label>
                         <input class="campo" type="text" name="nombreAnimal" id="nombreAnimal" required>
-
-                        <label for="especieAnimal" class="campo-label">Especie del animal</label>
-                        <input class="campo" type="text" name="especieAnimal" id="especieAnimal" required>
+                          <label for="especieAnimal" class="campo-label">Especie del animal</label>
+<select class="campo" name="especieAnimal" id="especieAnimal" required>
+    <option value="">Selecciona una especie</option>
+    <option value="Perro">Perro</option>
+    <option value="Gato">Gato</option>
+    <option value="Ave">Ave</option>
+    <option value="Conejo">Conejo</option>
+    <option value="Otro">Otro</option>
+</select>
 
                         <label for="razaAnimal" class="campo-label">Raza del animal</label>
                         <input class="campo" type="text" name="razaAnimal" id="razaAnimal" required>
