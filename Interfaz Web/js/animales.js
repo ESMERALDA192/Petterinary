@@ -30,7 +30,6 @@ async function cargarAnimales(){
 
                 <td>${animal.propietarioId?.nombrePropietario ?? "Sin propietario"}</td>
 
-                <td>-</td>
 
                 <td>${animal.especieAnimal}</td>
 
