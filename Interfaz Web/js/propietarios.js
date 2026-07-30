@@ -105,3 +105,8 @@ async function eliminarPropietarioTabla(e){
 }
 
 }
+
+const opciones = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+const fechaFormateada = new Date().toLocaleDateString("es-MX", opciones);
+document.getElementById("fechaHoy").textContent =
+    fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1);

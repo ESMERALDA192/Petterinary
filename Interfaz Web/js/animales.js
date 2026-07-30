@@ -46,7 +46,6 @@ async function cargarAnimales(){
 
                 <td>${animal.propietarioId?.nombrePropietario ?? "Sin propietario"}</td>
 
-                <td>-</td>
 
              <td>
     <span class="fila-especie">
@@ -140,3 +139,8 @@ async function eliminarAnimalTabla(e){
     cargarAnimales();
 
 }
+
+const opciones = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+const fechaFormateada = new Date().toLocaleDateString("es-MX", opciones);
+document.getElementById("fechaHoy").textContent =
+    fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1);

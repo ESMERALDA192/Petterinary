@@ -307,6 +307,22 @@ textarea:focus-visible{
 .header{
     background-color: var(--verdePrimario);
     box-shadow: var(--sombraSuave);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 2px, transparent 2px);
+    background-size: 2.4rem 2.4rem;
+    pointer-events: none;
+}
+
+.header .contenedor-centrar{
+    position: relative;
+    z-index: 1;
 }
 
 .logo-dash{
@@ -422,6 +438,10 @@ textarea:focus-visible{
 
 .seccion-bienvenida-dashboard{
     margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
 }
 
 .seccion-bienvenida-dashboard p{
@@ -437,6 +457,18 @@ textarea:focus-visible{
 .seccion-bienvenida-dashboard .texto-principal{
     font-size: 3.6rem;
     margin-top: 3rem;
+}
+
+.ilustracion-bienvenida{
+    flex-shrink: 0;
+    width: 12rem;
+    opacity: 0.9;
+}
+
+@media(max-width: 768px){
+    .ilustracion-bienvenida{
+        display: none;
+    }
 }
 
 .cards{
@@ -457,7 +489,7 @@ textarea:focus-visible{
 /* Tarjetas tipo "ficha de expediente": fondo blanco,
    pestaña de color a la izquierda, número en serif grande. */
 .card{
-    padding: 2rem 2.2rem;
+    padding: 2rem 6rem 2rem 2.2rem;
     width: 100%;
     border-radius: 0.8rem;
     background-color: var(--blanco);
@@ -481,6 +513,24 @@ textarea:focus-visible{
     font-weight: 600;
 }
 
+/* Icono circular en cada tarjeta */
+.card-icono-wrap{
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icono-wrap svg{
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
 .card-verde{
     border-left-color: var(--verdeSecundario);
 }
@@ -490,6 +540,8 @@ textarea:focus-visible{
 .card-verde .numero-card{
     color: var(--verdeTexto);
 }
+.card-verde .card-icono-wrap{ background-color: var(--verdeCards); }
+.card-verde .card-icono-wrap svg{ fill: var(--verdeSecundario); }
 
 .card-rojo{
     border-left-color: var(--rojoPrimario);
@@ -500,6 +552,8 @@ textarea:focus-visible{
 .card-rojo .numero-card{
     color: var(--rojoTexto);
 }
+.card-rojo .card-icono-wrap{ background-color: var(--rojoCards); }
+.card-rojo .card-icono-wrap svg{ fill: var(--rojoSecundario); }
 
 .card-amarillo{
     border-left-color: var(--amarilloSecundario);
@@ -510,6 +564,8 @@ textarea:focus-visible{
 .card-amarillo .numero-card{
     color: var(--amarilloTexto);
 }
+.card-amarillo .card-icono-wrap{ background-color: var(--amarilloCard); }
+.card-amarillo .card-icono-wrap svg{ fill: var(--amarilloSecundario); }
 
 .card-morado{
     border-left-color: var(--moradoSecundario);
@@ -520,6 +576,8 @@ textarea:focus-visible{
 .card-morado .numero-card{
     color: var(--moradoTexto);
 }
+.card-morado .card-icono-wrap{ background-color: var(--moradoCards); }
+.card-morado .card-icono-wrap svg{ fill: var(--moradoSecundario); }
 
 /*############### Terminan estilos de las cards del dashboard ###############*/
 
@@ -550,6 +608,8 @@ textarea:focus-visible{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    text-align: center;
 }
 
 .contenedor-fila:last-child{
@@ -570,6 +630,11 @@ textarea:focus-visible{
     padding-bottom: 1rem;
     border-bottom: 2px solid var(--verdeCards);
     margin-bottom: 0.5rem;
+}
+
+.contenedor-encabezado-tabla-citas-hoy,
+.contenedor-encabezado-tabla-notificaciones{
+    background-color: var(--verdeCards);
 }
 
 .estado-fila{
@@ -640,6 +705,42 @@ textarea:focus-visible{
     transform: translateY(-1px);
 }
 
+.btnEditar{
+    background-color: rgb(254, 188, 65);
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+
+}
+
+.btnEditar:hover{
+    background-color: rgb(230, 170, 58);
+}
+
+.btnEliminar{
+    background-color: rgb(244, 80, 80);
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+
+}
+
+.btnEliminar:hover{
+    background-color: rgb(213, 69, 69);
+}
+
 .contenido-tabla{
     display: flex;
     justify-content: center;
@@ -657,24 +758,38 @@ textarea:focus-visible{
     width: 100%;
     min-width: 70rem;
     border-collapse: collapse;
+    text-transform: uppercase;
 }
 
 .tabla th{
-    color: var(--verdePrimario);
+    color: var(--blanco);
     font-size: 1.4rem;
-    text-transform: uppercase;
     letter-spacing: 0.03em;
-    border-bottom: 2px solid var(--verdeCards);
+}
+
+.tabla .encabezados-tablas{
+    background-color: var(--verdeSecundario);
+    color: var(--blanco);
+    transition: all 0.3s;
+}
+
+.tabla .encabezados-tablas:hover{
+    background-color: var(--verdeTexto);
+    color: var(--blanco);
+}
+
+.tabla tbody tr{
+    transition: all 0.3s;
+}
+
+.tabla tbody tr:hover{
+    background-color: var(--verdeCards);
 }
 
 .tabla th,td{
     padding: 1.2rem 1rem;
     border-bottom: 1px solid var(--lineaSutil);
     text-align: center;
-}
-
-.tabla tbody tr:hover{
-    background-color: var(--grisBody);
 }
 
 /*Estilos fomularios de registro*/
@@ -724,6 +839,7 @@ textarea:focus-visible{
     font-family: inherit;
     font-size: 1.6rem;
 }
+
 /*############### Elementos decorativos adicionales ###############*/
 
 /* Avatar circular con inicial del usuario */
@@ -743,79 +859,6 @@ textarea:focus-visible{
     flex-shrink: 0;
 }
 
-/* Icono circular en cada tarjeta */
-.card{
-    padding-right: 6rem;
-}
-
-.card-icono-wrap{
-    position: absolute;
-    top: 1.6rem;
-    right: 1.6rem;
-    width: 4.2rem;
-    height: 4.2rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-icono-wrap svg{
-    width: 2.2rem;
-    height: 2.2rem;
-}
-
-.card-verde .card-icono-wrap{ background-color: var(--verdeCards); }
-.card-verde .card-icono-wrap svg{ fill: var(--verdeSecundario); }
-
-.card-rojo .card-icono-wrap{ background-color: var(--rojoCards); }
-.card-rojo .card-icono-wrap svg{ fill: var(--rojoSecundario); }
-
-.card-amarillo .card-icono-wrap{ background-color: var(--amarilloCard); }
-.card-amarillo .card-icono-wrap svg{ fill: var(--amarilloSecundario); }
-
-.card-morado .card-icono-wrap{ background-color: var(--moradoCards); }
-.card-morado .card-icono-wrap svg{ fill: var(--moradoSecundario); }
-
-/* Textura de fondo con huellas muy sutil, detrás del header */
-.header{
-    position: relative;
-    overflow: hidden;
-}
-
-.header::before{
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.05) 2px, transparent 2px);
-    background-size: 2.4rem 2.4rem;
-    pointer-events: none;
-}
-
-.header .contenedor-centrar{
-    position: relative;
-    z-index: 1;
-}
-
-/* Ilustración de firma en la bienvenida */
-.seccion-bienvenida-dashboard{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-}
-
-.ilustracion-bienvenida{
-    flex-shrink: 0;
-    width: 12rem;
-    opacity: 0.9;
-}
-
-@media(max-width: 768px){
-    .ilustracion-bienvenida{
-        display: none;
-    }
-}
 /*############### Iconos por especie de animal ###############*/
 .fila-especie{
     display: flex;

@@ -40,8 +40,8 @@
         <div class="contenedor-centrar">
             <div class="contenedor-animales">
                 <section class="seccion-bienvenida-dashboard">
-                    <p class="texto-principal">¡Bienvenido, Antony!</p>
-                    <p class="texto-secundario">Sábado, 11 de julio de 2026</p>
+                    <p class="texto-principal" id="bienvenidaNombre">¡Bienvenido!</p>
+                    <p class="texto-secundario" id="fechaHoy">Cargando fecha...</p>
                 </section>
                 <section class="contenedor-tabla">
                     <div class="contenedor-btn-tabla">
@@ -50,11 +50,10 @@
                     <div class="contenido-tabla">
                         <table class="tabla">
                             <thead>
-                                <tr>
+                                <tr class="encabezados-tablas">
                                     <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Dueño</th>
-                                    <th>Edad</th>
                                     <th>Especie</th>
                                     <th>Sexo</th>
                                     <th>Raza</th>
@@ -81,8 +80,9 @@
             </div>
         </div>
     </footer>
+    <script src="js/scripts.js"></script>
     <script src="js/api.js"></script>
-<script src="js/animales.js"></script>
+    <script src="js/animales.js"></script>
     <script src="https://kit.fontawesome.com/472ad113de.js" crossorigin="anonymous"></script>
     
     
