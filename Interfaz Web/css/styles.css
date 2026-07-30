@@ -94,27 +94,6 @@ textarea:focus-visible{
     outline: 2px solid var(--amarilloSecundario);
     outline-offset: 2px;
 }
-
-@media (prefers-reduced-motion: reduce){
-    *{
-        transition: none !important;
-        animation: none !important;
-    }
-}
-
-.texto-principal{
-    color: var(--verdePrimario);
-    font-family: "Fraunces", "Public Sans", serif;
-    font-size: 5rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-}
-
-.texto-secundario{
-    font-size: 1.6rem;
-    font-weight: 300;
-}
-
 /*############### Estilos de interfaz de login ###############*/
 .main-login{
     display: flex;
@@ -151,9 +130,7 @@ textarea:focus-visible{
 }
 
 .contenedor-izq{
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.35) 0, transparent 45%),
-        linear-gradient(160deg, var(--verdeCards) 0%, #D7EBE0 100%);
+    background-color: var(--verdeCards);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -161,8 +138,18 @@ textarea:focus-visible{
     align-items: center;
     padding: 2rem;
     gap: 2rem;
-    position: relative;
-    overflow: hidden;
+}
+
+.contenedor-izq .texto-principal{
+    font-weight: bold;
+    font-size: 3.6rem;
+    color: var(--verdePrimario);
+}
+
+.contenido-formulario-login .texto-principal{
+    font-weight: bold;
+    font-size: 3.6rem;
+    color: var(--verdePrimario);
 }
 
 .contenedor-izq .texto-secundario{
@@ -199,7 +186,7 @@ textarea:focus-visible{
     .contenido-formulario-login{
         text-align: center;
         padding: 2rem;
-
+        
     }
 }
 
@@ -228,8 +215,8 @@ textarea:focus-visible{
 
 .campo-label{
     color: var(--verdePrimario);
-    font-weight: 600;
-    font-size: 1.9rem;
+    font-weight: bold;
+    font-size: 2rem;
 }
 
 @media (max-width: 768px){
@@ -240,45 +227,35 @@ textarea:focus-visible{
 
 .campo{
     padding: 1.5rem;
-    border: 1px solid var(--lineaSutil);
-    border-radius: 0.6rem;
+    border: 1px solid var(--verdePrimario);
+    border-radius: 0.5rem;
     margin-bottom: 2rem;
     font-size: 1.8rem;
-    font-family: inherit;
-    background-color: var(--blanco);
-    transition: border-color 0.2s, background-color 0.2s;
 }
 
 .campo:focus{
-    border: 1.5px solid var(--verdeSecundario);
+    border: 2px solid var(--verdeSecundario);
     background-color: var(--verdeCards);
-    outline: none;
 }
 
 .contenedor-campos .boton-login{
     padding: 1.5rem;
     background-color: var(--verdeSecundario);
     border: none;
-    border-radius: 0.6rem;
+    border-radius: 0.5rem;
     color: var(--blanco);
-    font-weight: 600;
+    font-weight: bold;
     font-size: 1.8rem;
     cursor: pointer;
-    transition: background-color 0.25s, transform 0.15s;
+    transition: all 0.3s;
 }
 
 .contenedor-campos .boton-login:hover{
     background-color: var(--verdePrimario);
-    transform: translateY(-1px);
-}
-
-.contenedor-campos .boton-login:active{
-    transform: translateY(0);
 }
 
 .error{
     color: var(--rojoPrimario);
-    font-size: 1.5rem;
 }
 
 .hidden{
@@ -287,12 +264,11 @@ textarea:focus-visible{
 
 .texto-registro{
     text-align: center;
-    font-size: 1.5rem;
 }
 
 .link-registro{
     color: var(--verdeTexto);
-    font-weight: 700;
+    font-weight: bold;
     text-decoration: none;
 }
 
@@ -457,6 +433,8 @@ textarea:focus-visible{
 .seccion-bienvenida-dashboard .texto-principal{
     font-size: 3.6rem;
     margin-top: 3rem;
+    font-weight: bold;
+    color: var(--verdePrimario);
 }
 
 .ilustracion-bienvenida{
