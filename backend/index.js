@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
     res.send("API de Petterinary funcionando");
 });
 
-// Rutas de la API (las hace Paul)
+// Rutas de la API
 app.use("/api/propietarios", require("./routes/propietarios"));
 app.use("/api/animales", require("./routes/animales"));
 app.use("/api/consultas", require("./routes/consultas"));
